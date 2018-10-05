@@ -17,10 +17,8 @@ class InterviewTests extends PHPUnit\Framework\TestCase
     public function testReverseArray()
     {
         $data = "I want this job.";
+        $data = str_replace('.', '', $data);
         $data = Solution::reverseArray($data);
-
-        // Code here
-
         $this->assertEquals(['job', 'this', 'want', 'I'], $data);
     }
 
@@ -31,9 +29,7 @@ class InterviewTests extends PHPUnit\Framework\TestCase
     {
         $data = ["200", "450", "2.5", "1", "505.5", "2"];
 
-        // Code here
         $data = Solution::orderArray($data);
-
         $this->assertTrue(1 === $data[0]);
         $this->assertTrue(2 === $data[1]);
         $this->assertTrue(2.5 === $data[2]);
@@ -50,7 +46,7 @@ class InterviewTests extends PHPUnit\Framework\TestCase
         $data1 = [1, 2, 3, 4, 5, 6, 7];
         $data2 = [2, 4, 5, 7, 8, 9, 10];
         // Code here
-        $data = array_slice($data2, 4, 3, true);
+        $data = array_slice($data2, 4, 3);
         $this->assertEquals([8, 9, 10], $data);
         // Code here
         $data = [$data1[0], $data1[2], $data1[5]];
@@ -64,10 +60,8 @@ class InterviewTests extends PHPUnit\Framework\TestCase
     {
         $place1 = ['lat' => '41.9641684', 'lon' => '-87.6859726'];
         $place2 = ['lat' => '42.1820210', 'lon' => '-88.3429465'];
-
         // Code here
         $distance = Solution::getDistance($place1, $place2);
-
         $this->assertEquals(36.91, $distance);
     }
 
@@ -78,11 +72,12 @@ class InterviewTests extends PHPUnit\Framework\TestCase
     {
         $time1 = "2016-06-05T12:00:00";
         $time2 = "2016-06-05T15:00:00";
+        $time1t = new DateTime($time1);
+        $time2t = new DateTime($time2);
+        $interval = $time1t->diff($time2t);
+        $timeDiff = $interval->format('%h hours ago');
 
-        // Code here
-        $interval = $time1->diff($time2);
-        $timeDiff = $interval->format('%H hours ago');
-
+        echo '-------------------->' . $timeDiff;
         $this->assertEquals("3 hours ago", $timeDiff);
     }
 
